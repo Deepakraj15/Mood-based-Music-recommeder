@@ -3,36 +3,37 @@ import pandas as pd
 from Spotify import GetSongs
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
+from Spotify import GetSongs
 
 def GetActualSong(pred_class):
     
     if( pred_class=='Disgust' ):
 
         Play = music_df[music_df['mood'] =='Sad' ]
-        Play = Play.sort_values(by="popularity", ascending=False)
-        Play = Play[:20].reset_index(drop=True)
+        Play = Play.sample(frac=1)
+        Play = Play[:10].reset_index(drop=True)
         RecommendSongs(Play.iloc[0]['name'],Play)
 
     if( pred_class=='Happy' or pred_class=='Sad' ):
 
         Play = music_df[music_df['mood'] =='Happy' ]
-        Play = Play.sort_values(by="popularity", ascending=False)
-        Play = Play[:5].reset_index(drop=True)
+        Play = Play.sample(frac=1)
+        Play = Play[:10].reset_index(drop=True)
         RecommendSongs(Play.iloc[0]['name'],Play)
 
     if( pred_class=='Fear' or pred_class=='Angry' ):
 
         Play = music_df[music_df['mood'] =='Calm' ]
-        Play = Play.sort_values(by="popularity", ascending=False)
-        Play = Play[:5].reset_index(drop=True)
+        Play = Play.sample(frac=1)
+        Play = Play[:10].reset_index(drop=True)
         RecommendSongs(Play.iloc[0]['name'],Play)
 
         
     if( pred_class=='Surprise' or pred_class=='Neutral' ):
 
         Play = music_df[music_df['mood'] =='Energetic' ]
-        Play = Play.sort_values(by="popularity", ascending=False)
-        Play = Play[:5].reset_index(drop=True)
+        Play = Play.sample(frac=1)
+        Play = Play[:10].reset_index(drop=True)
         RecommendSongs(Play.iloc[0]['name'],Play)
 
 def RecommendSimiliarSongs(song_name, data):
@@ -76,10 +77,12 @@ def RecommendSongs(song_name, Play):
                     inplace=True)
     
     # First song will be the input song itself as the similarity will be highest.
-    print(Play[['name', 'artist']][2:])
+    for song in Play['name']:
+        GetSongs(song)
 
 
 
 music_df =pd.read_csv("./data_moods.csv")
 song_vectorizer = CountVectorizer()
 song_vectorizer.fit(music_df['mood'])
+GetActualSong('Surprise')

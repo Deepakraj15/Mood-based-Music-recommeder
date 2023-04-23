@@ -1,4 +1,3 @@
-import tekore as tk
 import os
 from dotenv import load_dotenv
 import spotipy
@@ -16,5 +15,4 @@ def GetAuthorized():
 
 def GetSongs(song):
     results = GetAuthorized().search(q=song, type='track')
-    print(results['tracks']['items'][0]['name'])
-
+    print(results['tracks']['items'][0]['external_urls']['spotify']," - ",song)
