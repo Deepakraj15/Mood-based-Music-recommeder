@@ -1,9 +1,11 @@
+import time
 import numpy as np
 import pandas as pd
 from Spotify import GetSongs
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import CountVectorizer
 from Spotify import GetSongs
+
 
 def GetActualSong(pred_class):
     
@@ -13,6 +15,7 @@ def GetActualSong(pred_class):
         Play = Play.sample(frac=1)
         Play = Play[:10].reset_index(drop=True)
         RecommendSongs(Play.iloc[0]['name'],Play)
+        time.sleep(5)
 
     if( pred_class=='Happy' or pred_class=='Sad' ):
 
@@ -20,6 +23,7 @@ def GetActualSong(pred_class):
         Play = Play.sample(frac=1)
         Play = Play[:10].reset_index(drop=True)
         RecommendSongs(Play.iloc[0]['name'],Play)
+        time.sleep(5)
 
     if( pred_class=='Fear' or pred_class=='Angry' ):
 
@@ -27,6 +31,7 @@ def GetActualSong(pred_class):
         Play = Play.sample(frac=1)
         Play = Play[:10].reset_index(drop=True)
         RecommendSongs(Play.iloc[0]['name'],Play)
+        time.sleep(5)
 
         
     if( pred_class=='Surprise' or pred_class=='Neutral' ):
@@ -35,6 +40,7 @@ def GetActualSong(pred_class):
         Play = Play.sample(frac=1)
         Play = Play[:10].reset_index(drop=True)
         RecommendSongs(Play.iloc[0]['name'],Play)
+        time.sleep(5)
 
 def RecommendSimiliarSongs(song_name, data):
     
