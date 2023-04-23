@@ -8,9 +8,13 @@ data/**
 
 #files
 
-.dotenv
+.env
 
 #images
 *.jpg
 *jpeg
 *.png
+
+#other files
+
+.cache
