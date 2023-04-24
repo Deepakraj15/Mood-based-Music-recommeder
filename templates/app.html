@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+        <head>
+            <title>Video Stream</title>
+            <link rel="stylesheet" href="{{url_for('static', filename='app.css')}}">
+              <script defer>
+                showText=()=>{
+                    var video = document.querySelector('#video');
+                    video.style.display="none";
+                }
+            </script>
+        </head>
+        <body>
+          <header>
+            <h1> Mood Based Music Recommender </h1>
+          </header>
+          <main>
+            <div class="left-side">
+              <div class="video-container">
+               <img id="video" src="{{ url_for('video_feed') }}">
+              </div>
+            <div class="button-container">
+                <form action="/getsongs" method="post">
+                      <button onclick="showText()">PROCESS</button>
+                </form>
+             </div>
+            </div>
+            <div class="right-side">
+              <h1 style="color:black">Recommended Songs</h1>
+               <div class="result-container">
+                {% if emotion_list == None %}
+                    <h1>Nothing is here to see!!</h1>
+                {% else %}
+                <ul>
+                  {% for link in emotion_list %}
+                    <li>
+                        <a href="{{link}}">{{ link }}</a>
+                    </li>
+                  {% endfor %}
+                  </ul>
+                  {% endif %}
+               </div>
+            </div>
+          </main>
+        </body>
+</html>

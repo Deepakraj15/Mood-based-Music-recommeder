@@ -15,4 +15,8 @@ def GetAuthorized():
 
 def GetSongs(song):
     results = GetAuthorized().search(q=song, type='track')
-    print(results['tracks']['items'][0]['external_urls']['spotify']," - ",song)
+    #print(results['tracks']['items'][2]['external_urls']['images'])
+    #print (results)
+    result = str(results['tracks']['items'][0]['external_urls']['spotify']+" - "+ song)
+    return result
+
